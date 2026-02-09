@@ -1,0 +1,103 @@
+/* ==========================================================================
+   Experience Section - SCSS nesting + responsive
+   ========================================================================== */
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.experience {
+  padding: $spacing-xxl 0;
+  background: linear-gradient(180deg, $color-bg 0%, $color-bg-dark 100%);
+  position: relative;
+  overflow: hidden;
+
+  @include respond-below($breakpoint-md) {
+    padding: $spacing-xl 0;
+  }
+
+  @include respond-below($breakpoint-sm) {
+    padding: $spacing-lg 0;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba($color-accent, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-xxl;
+
+    @include respond-below($breakpoint-md) {
+      margin-bottom: $spacing-xl;
+    }
+
+    @include respond-below($breakpoint-sm) {
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__heading {
+    font-size: $font-size-h2;
+    font-weight: $font-weight-extrabold;
+    color: $color-text;
+    margin-bottom: $spacing-sm;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    @include respond-below($breakpoint-md) {
+      font-size: 40px;
+    }
+
+    @include respond-below($breakpoint-sm) {
+      font-size: 32px;
+    }
+
+    @include respond-below($breakpoint-xs) {
+      font-size: 26px;
+    }
+  }
+
+  &__heading-line {
+    display: inline-block;
+
+    &--gradient {
+      background: linear-gradient(135deg, $color-text 0%, $color-accent 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__subtitle {
+    font-size: $font-size-large;
+    color: $color-text-light;
+    max-width: 600px;
+    margin: 0 auto;
+
+    @include respond-below($breakpoint-sm) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__list {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}

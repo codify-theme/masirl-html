@@ -1,0 +1,291 @@
+
+/* ==========================================================================
+   Blog Card - Modern Design for Swiper
+   ========================================================================== */
+   .blog-card {
+    background: linear-gradient(135deg, rgba(37, 37, 37, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
+    backdrop-filter: blur(20px);
+    border-radius: 28px;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 6px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 107, 53, 0.15);
+}
+
+.blog-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.08) 0%, rgba(247, 147, 30, 0.08) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.blog-card__image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0f0f0f 0%, #141414 100%);
+    z-index: 1;
+
+    @media (max-width: 768px) {
+        height: 200px;
+    }
+
+    @media (max-width: 480px) {
+        height: 180px;
+    }
+}
+
+.blog-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    filter: brightness(0.9) contrast(1.1);
+}
+
+.blog-card__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.95) 0%, rgba(247, 147, 30, 0.95) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(2px);
+}
+
+.blog-card__read-more {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    transform: scale(0.8);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.blog-card__read-more svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+.blog-card__read-more:hover {
+    background: #ffffff;
+    color: #ff6b35;
+    border-color: #ffffff;
+    transform: scale(1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.blog-card__read-more:hover svg {
+    transform: rotate(45deg);
+}
+
+.blog-card__content {
+    padding: 24px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: 768px) {
+        padding: 20px 20px;
+    }
+
+    @media (max-width: 480px) {
+        padding: 16px 16px;
+    }
+}
+
+.blog-card__category {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    border-radius: 24px;
+    margin-bottom: 16px;
+    align-self: flex-start;
+    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.blog-card__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-bottom: 16px;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    letter-spacing: -0.5px;
+
+    @media (max-width: 768px) {
+        font-size: 20px;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 18px;
+    }
+}
+
+.blog-card__excerpt {
+    font-size: 16px;
+    color: #b8b8b8;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.blog-card__footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 107, 53, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+}
+
+.blog-card__author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+}
+
+.blog-card__author-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 107, 53, 0.2);
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.blog-card__author-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.blog-card__author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.blog-card__author-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e5e5e5;
+}
+
+.blog-card__date {
+    font-size: 12px;
+    color: #b8b8b8;
+    font-weight: 400;
+}
+
+.blog-card__read-time {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #b8b8b8;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.blog-card__read-time svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.blog-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.6), 0 16px 32px rgba(255, 107, 53, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 107, 53, 0.5);
+}
+
+.blog-card:hover::before {
+    opacity: 1;
+}
+
+.blog-card:hover .blog-card__image {
+    transform: scale(1.15);
+    filter: brightness(1) contrast(1.2);
+}
+
+.blog-card:hover .blog-card__overlay {
+    opacity: 1;
+}
+
+.blog-card:hover .blog-card__read-more {
+    transform: scale(1);
+}
+
+.blog-card:hover .blog-card__title {
+    color: #ff6b35;
+    transform: translateY(-2px);
+}
+
+.blog-card:hover .blog-card__category {
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 107, 53, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.blog-card:hover .blog-card__author-avatar {
+    transform: scale(1.1);
+    border-color: rgba(255, 107, 53, 0.5);
+    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+}

@@ -1,0 +1,426 @@
+/* ==========================================================================
+   Contact Section - SCSS nesting + responsive
+   ========================================================================== */
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.contact {
+  position: relative;
+  padding: $spacing-xxl 0;
+  background-color: $color-bg;
+  overflow: hidden;
+
+  @include respond-below($breakpoint-md) {
+    padding: $spacing-xl 0;
+  }
+
+  @include respond-below($breakpoint-sm) {
+    padding: $spacing-lg 0;
+  }
+
+  @include respond-below($breakpoint-xs) {
+    padding: $spacing-md 0;
+  }
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &__gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    animation: float 20s ease-in-out infinite;
+
+    &--1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba($color-accent, 0.4) 0%, transparent 70%);
+      top: -200px;
+      right: -200px;
+      animation-delay: 0s;
+
+      @include respond-below($breakpoint-sm) {
+        width: 280px;
+        height: 280px;
+        top: -100px;
+        right: -100px;
+      }
+    }
+
+    &--2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba($color-gradient-end, 0.4) 0%, transparent 70%);
+      bottom: -150px;
+      left: -150px;
+      animation-delay: 10s;
+
+      @include respond-below($breakpoint-sm) {
+        width: 220px;
+        height: 220px;
+        bottom: -80px;
+        left: -80px;
+      }
+    }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include respond-above($breakpoint-md) {
+      max-width: 720px;
+      padding-left: $spacing-md;
+      padding-right: $spacing-md;
+    }
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+
+    @include respond-above($breakpoint-md) {
+      margin-bottom: $spacing-xxl;
+    }
+
+    @include respond-below($breakpoint-sm) {
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__heading {
+    font-size: $font-size-h2;
+    font-weight: $font-weight-extrabold;
+    color: $color-text;
+    text-align: center;
+    margin-bottom: $spacing-md;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.2;
+
+    @include respond-below($breakpoint-md) {
+      font-size: 40px;
+    }
+
+    @include respond-below($breakpoint-sm) {
+      font-size: 32px;
+    }
+
+    @include respond-below($breakpoint-xs) {
+      font-size: 26px;
+      margin-bottom: $spacing-sm;
+    }
+  }
+
+  &__heading-line {
+    display: block;
+
+    &--gradient {
+      background: linear-gradient(135deg, $color-gradient-start 0%, $color-gradient-end 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__subtitle {
+    font-size: $font-size-large;
+    color: $color-text-light;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+
+    @include respond-below($breakpoint-sm) {
+      font-size: $font-size-base;
+    }
+
+    @include respond-below($breakpoint-xs) {
+      font-size: $font-size-small;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    background: rgba($color-bg-light, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($color-primary, 0.1);
+    border-radius: 24px;
+    padding: $spacing-lg;
+    box-shadow: 0 20px 60px $color-shadow, 0 0 0 1px rgba($color-primary, 0.05) inset;
+
+    @include respond-above($breakpoint-md) {
+      padding: $spacing-xl 56px $spacing-xxl;
+      gap: $spacing-lg;
+      border-radius: 28px;
+      box-shadow: 0 24px 80px $color-shadow, 0 0 0 1px rgba($color-primary, 0.06) inset;
+    }
+
+    @include respond-below($breakpoint-md) {
+      padding: $spacing-xl;
+      gap: $spacing-md;
+    }
+
+    @include respond-below($breakpoint-sm) {
+      padding: $spacing-md;
+      gap: $spacing-sm;
+      border-radius: 20px;
+    }
+
+    @include respond-below($breakpoint-xs) {
+      padding: $spacing-sm;
+      border-radius: 16px;
+    }
+
+    .row {
+      margin-left: -12px;
+      margin-right: -12px;
+
+      @include respond-above($breakpoint-md) {
+        margin-left: -16px;
+        margin-right: -16px;
+      }
+
+      > [class*='col-'] {
+        padding-left: 12px;
+        padding-right: 12px;
+
+        @include respond-above($breakpoint-md) {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+      }
+    }
+  }
+
+  &__field {
+    width: 100%;
+  }
+
+  &__input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+  }
+
+  &__input-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: $color-text-light;
+    z-index: 1;
+    transition: $transition-base;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &--textarea {
+      top: 22px;
+      transform: none;
+    }
+
+    @include respond-below($breakpoint-xs) {
+      left: 16px;
+      width: 18px;
+      height: 18px;
+
+      &.contact__input-icon--textarea {
+        top: 18px;
+      }
+    }
+  }
+
+  &__input,
+  &__select,
+  &__textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 52px;
+    padding: 16px 20px 16px 56px;
+    font-size: $font-size-base;
+    line-height: 1.5;
+    font-family: inherit;
+    color: $color-text;
+    background-color: rgba(30, 30, 30, 0.8);
+    border: 2px solid rgba($color-accent, 0.15);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+
+    @include respond-above($breakpoint-md) {
+      min-height: 56px;
+      padding: 18px 24px 18px 56px;
+      border-radius: 14px;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    &::placeholder {
+      color: $color-text-light;
+      opacity: 0.6;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent;
+      background-color: rgba(40, 40, 40, 0.9);
+      box-shadow: 0 0 0 4px rgba($color-accent, 0.15), 0 8px 24px $color-shadow;
+      transform: translateY(-2px);
+    }
+
+    &:hover:not(:focus) {
+      border-color: rgba($color-accent, 0.3);
+      background-color: rgba(35, 35, 35, 0.85);
+    }
+
+    @include respond-below($breakpoint-xs) {
+      min-height: 48px;
+      padding: 14px 16px 14px 48px;
+      font-size: 15px;
+    }
+  }
+
+  &__textarea {
+    min-height: 160px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    resize: vertical;
+    line-height: 1.6;
+    vertical-align: top;
+
+    @include respond-above($breakpoint-md) {
+      min-height: 180px;
+      padding-top: 22px;
+      padding-bottom: 22px;
+    }
+
+    @include respond-below($breakpoint-xs) {
+      min-height: 120px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+  }
+
+  &__select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23ff6b35' d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    padding-right: 52px;
+    background-size: 16px;
+
+    option {
+      background-color: $color-bg-light;
+      color: $color-text;
+      padding: $spacing-sm;
+    }
+  }
+
+  &__submit-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: $spacing-sm;
+
+    @include respond-above($breakpoint-md) {
+      margin-top: $spacing-md;
+    }
+  }
+
+  &__submit {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-primary;
+    background: linear-gradient(135deg, $color-gradient-start 0%, $color-gradient-end 100%);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba($color-accent, 0.3);
+
+    @include respond-above($breakpoint-md) {
+      padding: 20px 48px;
+      font-size: $font-size-large;
+      border-radius: 14px;
+      letter-spacing: 1.5px;
+      box-shadow: 0 10px 32px rgba($color-accent, 0.35);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba($color-primary, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    svg {
+      transition: transform $transition-base;
+    }
+
+    &:hover {
+      background: linear-gradient(135deg, $color-accent-hover 0%, #ffa366 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba($color-accent, 0.4), 0 0 0 4px rgba($color-accent, 0.1);
+
+      &::before {
+        left: 100%;
+      }
+
+      svg {
+        transform: translateX(4px) translateY(-2px);
+      }
+    }
+
+    &:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 8px 24px rgba($color-accent, 0.3), 0 0 0 4px rgba($color-accent, 0.2);
+    }
+
+    @include respond-below($breakpoint-xs) {
+      width: 100%;
+      justify-content: center;
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-size-small;
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}

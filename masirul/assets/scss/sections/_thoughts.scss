@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Thoughts Section - SCSS nesting + responsive
+   ========================================================================== */
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.thoughts {
+  padding: $spacing-xxl 0;
+  background: linear-gradient(180deg, $color-bg 0%, $color-bg-dark 100%);
+  position: relative;
+  overflow: hidden;
+
+  @include respond-below($breakpoint-md) {
+    padding: $spacing-xl 0;
+  }
+
+  @include respond-below($breakpoint-sm) {
+    padding: $spacing-lg 0;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 30%, rgba($color-accent, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba($color-gradient-end, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+
+    @include respond-below($breakpoint-sm) {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-lg;
+    position: relative;
+    z-index: 1;
+
+    @include respond-below($breakpoint-sm) {
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  &__heading {
+    font-size: $font-size-h2;
+    font-weight: $font-weight-extrabold;
+    color: $color-text;
+    margin-bottom: $spacing-md;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    @include respond-below($breakpoint-md) {
+      font-size: 40px;
+    }
+
+    @include respond-below($breakpoint-sm) {
+      font-size: 32px;
+    }
+
+    @include respond-below($breakpoint-xs) {
+      font-size: 26px;
+    }
+  }
+
+  &__heading-line {
+    display: inline-block;
+
+    &--gradient {
+      background: linear-gradient(135deg, $color-text 0%, $color-accent 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__subtitle {
+    font-size: $font-size-large;
+    color: $color-text-light;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: $spacing-sm;
+
+    @include respond-below($breakpoint-sm) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__slider-wrapper {
+    position: relative;
+    z-index: 1;
+    padding: $spacing-md 0 0;
+  }
+}
+
+/* Swiper overrides for thoughts */
+.thoughts-swiper {
+  padding: $spacing-md 60px $spacing-md !important;
+
+  @include respond-below($breakpoint-sm) {
+    padding: $spacing-md 40px $spacing-md !important;
+  }
+
+  @include respond-below($breakpoint-xs) {
+    padding: $spacing-sm 24px $spacing-sm !important;
+  }
+
+  .swiper-slide {
+    height: auto;
+    opacity: 0.7;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .swiper-slide-active {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.thoughts-swiper-button-next,
+.thoughts-swiper-button-prev {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, rgba($color-bg-light, 0.95) 0%, rgba($color-bg, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba($color-accent, 0.3);
+  border-radius: 50%;
+  color: $color-accent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px $color-shadow;
+
+  &::after {
+    font-size: 20px;
+    font-weight: $font-weight-bold;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, rgba($color-accent, 0.2) 0%, rgba($color-gradient-end, 0.2) 100%);
+    border-color: rgba($color-accent, 0.5);
+    color: $color-accent-light;
+    transform: scale(1.1);
+    box-shadow: 0 8px 24px rgba($color-accent, 0.4);
+  }
+
+  @include respond-below($breakpoint-sm) {
+    width: 44px;
+    height: 44px;
+
+    &::after {
+      font-size: 16px;
+    }
+  }
+
+  @include respond-below($breakpoint-xs) {
+    width: 40px;
+    height: 40px;
+
+    &::after {
+      font-size: 14px;
+    }
+  }
+}
+
+.thoughts-swiper-button-next {
+  right: 0;
+}
+
+.thoughts-swiper-button-prev {
+  left: 0;
+}
+
+.thoughts-swiper-pagination {
+  bottom: 20px !important;
+  position: relative;
+  margin-top: $spacing-sm;
+
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: rgba($color-accent, 0.3);
+    opacity: 1;
+    transition: all $transition-base;
+    margin: 0 6px;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: linear-gradient(135deg, $color-gradient-start 0%, $color-gradient-end 100%);
+    width: 32px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba($color-accent, 0.5);
+  }
+}

@@ -1,0 +1,78 @@
+/* ==========================================================================
+   Stats Section - SCSS nesting + responsive
+   ========================================================================== */
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.stats {
+  padding: $spacing-xl 0;
+  background-color: $color-bg-dark;
+
+  @include respond-below($breakpoint-md) {
+    padding: $spacing-lg 0;
+  }
+
+  @include respond-below($breakpoint-sm) {
+    padding: $spacing-md 0;
+  }
+
+  &__item {
+    text-align: center;
+    padding: $spacing-lg;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: $transition-slow;
+
+    @include respond-below($breakpoint-md) {
+      padding: $spacing-md;
+    }
+
+    @include respond-below($breakpoint-sm) {
+      padding: $spacing-sm;
+    }
+
+    @include respond-below($breakpoint-xs) {
+      padding: $spacing-xs;
+    }
+
+    &--animated.animated,
+    &--animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__number {
+    font-size: 72px;
+    font-weight: $font-weight-extrabold;
+    color: $color-accent;
+    margin-bottom: $spacing-sm;
+    line-height: 1;
+
+    @include respond-below($breakpoint-md) {
+      font-size: 56px;
+    }
+
+    @include respond-below($breakpoint-sm) {
+      font-size: 48px;
+    }
+
+    @include respond-below($breakpoint-xs) {
+      font-size: 36px;
+    }
+  }
+
+  &__label {
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    color: $color-text-light;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.4;
+
+    @include respond-below($breakpoint-xs) {
+      font-size: 12px;
+    }
+  }
+}

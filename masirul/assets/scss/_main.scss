@@ -1,0 +1,48 @@
+/**
+ * Main manifest - forwards all partials (use @use and @forward only)
+ * Masirul - Personal Portfolio and CV Resume HTML Template
+ */
+
+// ==========================================================================
+// Variables & Mixins (load first so partials can use them)
+// ==========================================================================
+@forward 'variables';
+@forward 'mixins';
+
+// ==========================================================================
+// Base Styles
+// ==========================================================================
+@forward 'base/reset';
+@forward 'base/typography';
+@forward 'base/utilities';
+
+// ==========================================================================
+// Components
+// ==========================================================================
+@forward 'components/navigation';
+@forward 'components/hero';
+@forward 'components/stats';
+@forward 'components/skills';
+@forward 'components/project-card';
+@forward 'components/experience-item';
+@forward 'components/tool-card';
+@forward 'components/thought-card';
+@forward 'components/blog-card';
+@forward 'components/contact-form';
+@forward 'components/footer';
+
+// ==========================================================================
+// Sections
+// ==========================================================================
+@forward 'sections/projects';
+@forward 'sections/experience';
+@forward 'sections/tools';
+@forward 'sections/thoughts';
+@forward 'sections/contact';
+
+// ==========================================================================
+// Animations
+// ==========================================================================
+@forward 'animations/fade-in';
+@forward 'animations/slide-up';
+@forward 'animations/parallax';

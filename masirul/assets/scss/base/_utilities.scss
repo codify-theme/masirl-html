@@ -1,0 +1,48 @@
+/**
+ * Utility Classes
+ */
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+
+  @include respond-below($breakpoint-sm) {
+    padding: 0 $spacing-sm;
+  }
+
+  @include respond-below($breakpoint-xs) {
+    padding: 0 $spacing-xs;
+  }
+}
+
+.section {
+  padding: $spacing-xxl 0;
+
+  @include respond-below($breakpoint-md) {
+    padding: $spacing-xl 0;
+  }
+
+  @include respond-below($breakpoint-sm) {
+    padding: $spacing-lg 0;
+  }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

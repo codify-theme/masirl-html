@@ -1,0 +1,175 @@
+/* ==========================================================================
+   Navigation - SCSS nesting + responsive
+   ========================================================================== */
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-index-nav;
+  background-color: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba($color-accent, 0.2);
+  transition: $transition-base;
+
+  &__container {
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: $spacing-sm $container-padding;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include respond-below($breakpoint-sm) {
+      padding: $spacing-sm $spacing-sm;
+    }
+
+    @include respond-below($breakpoint-xs) {
+      padding: $spacing-xs $spacing-xs;
+    }
+  }
+
+  &__logo {
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    color: $color-accent;
+  }
+
+  &__logo-link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    text-decoration: none;
+    color: inherit;
+    transition: $transition-base;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__logo-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba($color-accent, 0.3);
+    transition: $transition-base;
+    box-shadow: 0 4px 12px rgba($color-accent, 0.2);
+
+    &:hover {
+      border-color: rgba($color-accent, 0.6);
+      box-shadow: 0 6px 16px rgba($color-accent, 0.4);
+      transform: scale(1.05);
+    }
+
+    @include respond-below($breakpoint-xs) {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &__logo-text {
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    background: linear-gradient(135deg, $color-gradient-start 0%, $color-accent-hover 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    @include respond-below($breakpoint-xs) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    @include respond-below($breakpoint-sm) {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background-color: $color-bg;
+      flex-direction: column;
+      padding: $spacing-lg;
+      transform: translateY(-100%);
+      opacity: 0;
+      visibility: hidden;
+      transition: $transition-base;
+      border-bottom: 1px solid rgba($color-accent, 0.2);
+    }
+
+    &--active {
+      @include respond-below($breakpoint-sm) {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &__item {
+    @include respond-below($breakpoint-sm) {
+      width: 100%;
+    }
+  }
+
+  &__link {
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    color: $color-text-light;
+    padding: $spacing-xs $spacing-sm;
+    display: block;
+    transition: $transition-base;
+    position: relative;
+
+    &:hover {
+      color: $color-accent;
+    }
+
+    &--active {
+      color: $color-accent;
+      font-weight: $font-weight-semibold;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: $spacing-sm;
+        right: $spacing-sm;
+        height: 2px;
+        background: linear-gradient(90deg, $color-gradient-start 0%, $color-gradient-end 100%);
+      }
+    }
+
+    @include respond-below($breakpoint-sm) {
+      padding: $spacing-sm;
+      text-align: center;
+    }
+  }
+
+  &__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding: $spacing-xs;
+
+    @include respond-below($breakpoint-sm) {
+      display: flex;
+    }
+  }
+
+  &__toggle-line {
+    width: 24px;
+    height: 2px;
+    background-color: $color-accent;
+    transition: $transition-base;
+  }
+}

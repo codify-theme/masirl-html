@@ -1,0 +1,18 @@
+/**
+ * Mixins - Responsive breakpoints and utilities
+ * Use with variables: $breakpoint-xs, $breakpoint-sm, $breakpoint-md, $breakpoint-lg, $breakpoint-xl
+ */
+
+// Respond below (max-width) - pass variable e.g. $breakpoint-sm
+@mixin respond-below($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Respond above (min-width)
+@mixin respond-above($breakpoint) {
+  @media (min-width: $breakpoint + 1px) {
+    @content;
+  }
+}

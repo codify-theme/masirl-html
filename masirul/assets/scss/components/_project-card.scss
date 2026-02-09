@@ -1,0 +1,236 @@
+/**
+ * Project Card Component - Modern Design
+ * BEM: .project-card, .project-card__image-wrapper, .project-card__image, .project-card__overlay, .project-card__link, .project-card__title
+ */
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.project-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: $color-bg-light;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &--animated {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    &__image-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px 16px 0 0;
+        aspect-ratio: 16 / 10;
+        background: linear-gradient(135deg, $color-bg-darker 0%, $color-bg-dark 100%);
+        margin-bottom: 0;
+
+        @include respond-below($breakpoint-xs) {
+            aspect-ratio: 4 / 3;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+    }
+
+    &__badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, $color-gradient-start 0%, $color-gradient-end 100%);
+        color: $color-primary;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: $font-weight-semibold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        z-index: 2;
+        box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+        backdrop-filter: blur(10px);
+
+        @include respond-below($breakpoint-xs) {
+            top: 12px;
+            right: 12px;
+            padding: 4px 10px;
+            font-size: 11px;
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 107, 53, 0.95) 0%, rgba(247, 147, 30, 0.95) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(2px);
+    }
+
+    &__overlay-content {
+        text-align: center;
+        padding: $spacing-md;
+        transform: translateY(20px);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &__category {
+        display: inline-block;
+        color: $color-secondary;
+        font-size: 12px;
+        font-weight: $font-weight-semibold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: $spacing-md;
+        padding: 4px 12px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+    }
+
+    &__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: $color-secondary;
+        font-weight: $font-weight-semibold;
+        font-size: 14px;
+        padding: 12px 24px;
+        background-color: rgba(255, 255, 255, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        text-decoration: none;
+
+        svg {
+            transition: transform 0.3s ease;
+        }
+
+        &:hover {
+            background-color: $color-secondary;
+            color: $color-primary;
+            border-color: $color-secondary;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+            svg {
+                transform: translateX(4px);
+            }
+        }
+    }
+
+    &__content {
+        padding: $spacing-md;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        @include respond-below($breakpoint-sm) {
+            padding: $spacing-sm;
+        }
+    }
+
+    &__title {
+        font-size: $font-size-h4;
+        font-weight: $font-weight-bold;
+        color: $color-text;
+        margin-bottom: $spacing-xs;
+        line-height: 1.3;
+        transition: color 0.3s ease;
+
+        @include respond-below($breakpoint-sm) {
+            font-size: 20px;
+        }
+
+        @include respond-below($breakpoint-xs) {
+            font-size: 18px;
+        }
+    }
+
+    &__description {
+        font-size: $font-size-base;
+        color: $color-text-light;
+        line-height: 1.6;
+        margin-bottom: $spacing-sm;
+        flex: 1;
+
+        @include respond-below($breakpoint-xs) {
+            font-size: $font-size-small;
+        }
+    }
+
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: auto;
+    }
+
+    &__tag {
+        display: inline-block;
+        padding: 4px 12px;
+        background-color: $color-bg;
+        color: $color-text-light;
+        font-size: 12px;
+        font-weight: $font-weight-medium;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 107, 53, 0.2);
+    }
+
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08);
+
+        .project-card__image {
+            transform: scale(1.08);
+        }
+
+        .project-card__overlay {
+            opacity: 1;
+        }
+
+        .project-card__overlay-content {
+            transform: translateY(0);
+        }
+
+        .project-card__title {
+            color: $color-accent;
+        }
+
+        .project-card__tag {
+            background: linear-gradient(135deg, $color-gradient-start 0%, $color-gradient-end 100%);
+            color: $color-secondary;
+        }
+    }
+
+    // Filter animation
+    &.filter-hidden {
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+}
