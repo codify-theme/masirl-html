@@ -8,13 +8,13 @@
  * @copyright   2026
  */
 
-(function($) {
+(function ($) {
     'use strict';
 
     /**
      * Document Ready
      */
-    $(document).ready(function() {
+    $(document).ready(function () {
         initNavigation();
         initSmoothScroll();
         initCounterAnimation();
@@ -35,13 +35,13 @@
         const $navLinks = $('.nav__link');
 
         // Mobile menu toggle
-        $navToggle.on('click', function() {
+        $navToggle.on('click', function () {
             $navMenu.toggleClass('nav__menu--active');
             $(this).toggleClass('nav__toggle--active');
         });
 
         // Close mobile menu when clicking on a link
-        $navLinks.on('click', function() {
+        $navLinks.on('click', function () {
             if ($(window).width() <= 768) {
                 $navMenu.removeClass('nav__menu--active');
                 $navToggle.removeClass('nav__toggle--active');
@@ -49,13 +49,13 @@
         });
 
         // Active navigation link on scroll
-        $(window).on('scroll', function() {
+        $(window).on('scroll', function () {
             const scrollPos = $(window).scrollTop() + 100;
 
-            $navLinks.each(function() {
+            $navLinks.each(function () {
                 const $link = $(this);
                 const href = $link.attr('href');
-                
+
                 if (href && href.startsWith('#')) {
                     const target = $(href);
                     if (target.length) {
@@ -72,7 +72,7 @@
         });
 
         // Navbar background on scroll
-        $(window).on('scroll', function() {
+        $(window).on('scroll', function () {
             if ($(window).scrollTop() > 50) {
                 $nav.addClass('nav--scrolled');
             } else {
@@ -85,13 +85,13 @@
      * Smooth Scroll
      */
     function initSmoothScroll() {
-        $('a[href^="#"]').on('click', function(e) {
+        $('a[href^="#"]').on('click', function (e) {
             const target = $(this.getAttribute('href'));
-            
+
             if (target.length) {
                 e.preventDefault();
                 const offset = $('.nav').outerHeight() || 0;
-                
+
                 $('html, body').animate({
                     scrollTop: target.offset().top - offset
                 }, 800, 'swing');
@@ -113,7 +113,7 @@
             const increment = target / (duration / 16);
             let current = 0;
 
-            const timer = setInterval(function() {
+            const timer = setInterval(function () {
                 current += increment;
                 if (current >= target) {
                     $this.text('+' + target);
@@ -124,7 +124,7 @@
             }, 16);
         }
 
-        $(window).on('scroll', function() {
+        $(window).on('scroll', function () {
             if (!animated) {
                 const statsSection = $('.stats');
                 const statsTop = statsSection.offset().top;
@@ -133,7 +133,7 @@
                 const windowBottom = windowTop + $(window).height();
 
                 if (windowBottom >= statsTop && windowTop <= statsBottom) {
-                    $counters.each(function() {
+                    $counters.each(function () {
                         animateCounter($(this));
                     });
                     animated = true;
@@ -143,7 +143,7 @@
 
         // Trigger on page load if stats section is visible
         if ($(window).scrollTop() + $(window).height() >= $('.stats').offset().top) {
-            $counters.each(function() {
+            $counters.each(function () {
                 animateCounter($(this));
             });
             animated = true;
@@ -160,13 +160,14 @@
             const windowTop = $(window).scrollTop();
             const windowBottom = windowTop + $(window).height();
 
-            animatedElements.each(function() {
+            animatedElements.each(function () {
                 const $element = $(this);
                 if (!$element.hasClass('animated')) {
                     const elementTop = $element.offset().top;
                     const elementBottom = elementTop + $element.outerHeight();
 
-                    if (windowBottom >= elementTop + 100 && windowTop <= elementBottom) {
+                    // Trigger earlier by checking if windowBottom passes elementTop minus a small offset
+                    if (windowBottom >= elementTop - 50 && windowTop <= elementBottom) {
                         $element.addClass('animated');
                     }
                 }
@@ -181,21 +182,21 @@
      * Contact Form
      */
     function initContactForm() {
-        $('#contactForm').on('submit', function(e) {
+        $('#contactForm').on('submit', function (e) {
             e.preventDefault();
-            
+
             const $form = $(this);
             const $submit = $form.find('.contact__submit');
             const originalText = $submit.text();
-            
+
             // Simulate form submission
             $submit.text('Sending...').prop('disabled', true);
-            
-            setTimeout(function() {
+
+            setTimeout(function () {
                 $submit.text('Sent!').prop('disabled', false);
                 $form[0].reset();
-                
-                setTimeout(function() {
+
+                setTimeout(function () {
                     $submit.text(originalText);
                 }, 2000);
             }, 1500);
@@ -209,18 +210,18 @@
         if (!window.matchMedia('(min-width: 769px)').matches) {
             return;
         }
-    
+
         $(window).on('scroll', function () {
             const scrolled = $(window).scrollTop();
             const speed = 0.5;
-    
+
             $('.hero').each(function () {
                 const yPos = -(scrolled * speed);
                 $(this).css('transform', 'translateY(' + yPos + 'px)');
             });
         });
     }
-    
+
 
     /**
      * Portfolio Filter
@@ -229,7 +230,7 @@
         const $filterBtns = $('.filter-btn');
         const $projectCards = $('.project-card');
 
-        $filterBtns.on('click', function() {
+        $filterBtns.on('click', function () {
             const $this = $(this);
             const filterValue = $this.attr('data-filter');
 
@@ -239,18 +240,18 @@
 
             // Filter projects
             if (filterValue === 'all') {
-                $projectCards.each(function(index) {
+                $projectCards.each(function (index) {
                     const $card = $(this);
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $card.removeClass('filter-hidden');
                     }, index * 50);
                 });
             } else {
-                $projectCards.each(function(index) {
+                $projectCards.each(function (index) {
                     const $card = $(this);
                     const category = $card.attr('data-category');
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         if (category === filterValue) {
                             $card.removeClass('filter-hidden');
                         } else {
@@ -311,7 +312,7 @@
     /**
      * Window Resize Handler
      */
-    $(window).on('resize', function() {
+    $(window).on('resize', function () {
         // Close mobile menu on resize
         if ($(window).width() > 768) {
             $('.nav__menu').removeClass('nav__menu--active');
